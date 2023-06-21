@@ -1,0 +1,35 @@
+# Importing libearies
+import pandas as pd
+import numpy as np
+
+#  reading csv sample data
+data=pd.read_csv('Data.csv')
+print(data)
+
+# stripping all columns except last one
+row_data=np.array(data)[:, :-1]
+print(row_data)
+
+# stripping last column 
+target=np.array(data)[:, -1]
+print(target)
+
+# performing find -s algo
+def find_s(c, t):
+    specific_hypothesis= []
+    for i, val in enumerate(t):
+        if val=="YES":
+            specific_hypothesis=c[i].copy()
+            break
+
+    for i, val in enumerate(c):
+        if t[i] == "YES":
+            for x in range(len(specific_hypothesis)):
+                if val[x] != specific_hypothesis[x]:
+                    specific_hypothesis[x] = '?'
+                else:
+                    pass
+
+    return specific_hypothesis
+    
+    print(find_s(row_data,target))
